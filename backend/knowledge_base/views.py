@@ -1,11 +1,18 @@
+import logging
 
-from rest_framework.views import APIView
-from rest_framework.response import Response
+from django.db import transaction
+from django.shortcuts import get_object_or_404
 from rest_framework import status
-from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.parsers import FormParser, MultiPartParser
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from .models import PolicyDocument
+from .models import DocumentChunk, PolicyDocument
 from .serializers import PolicyDocumentSerializer
+from .services.chunking import chunk_extracted_pages
+from .services.pdf_loader import PDFProcessingError, extract_pdf_pages
+
+logger = logging.getLogger(__name__)
 
 
 class PolicyDocumentAPIView(APIView):
@@ -44,3 +51,92 @@ class PolicyDocumentAPIView(APIView):
             serializer.errors,
             status=status.HTTP_400_BAD_REQUEST
         )
+
+
+class PolicyDocumentProcessAPIView(APIView):
+    """Extract, chunk, and persist text from an uploaded policy PDF."""
+
+    def post(self, request, pk):
+        document = get_object_or_404(
+            PolicyDocument,
+            pk=pk,
+        )
+
+        document.status = PolicyDocument.Status.PROCESSING
+        document.save(update_fields=["status", "updated_at"])
+
+        try:
+            #pdf
+            pages = extract_pdf_pages(document.file)
+            #split to chunk akkum
+            chunks = chunk_extracted_pages(pages)
+
+            if not chunks:
+                raise PDFProcessingError(
+                    "No extractable chunks were generated from the PDF."
+                )
+
+            chunk_objects = [
+                DocumentChunk(
+                    document=document,
+                    chunk_index=chunk["chunk_index"],
+                    page_number=chunk["page"],
+                    section_title=chunk["section_title"],
+                    content=chunk["text"],
+                )
+                for chunk in chunks
+            ]
+
+            with transaction.atomic():
+                document.chunks.all().delete()
+                DocumentChunk.objects.bulk_create(chunk_objects)
+
+                document.extracted_pages = pages
+                document.page_count = len(pages)
+                document.status = PolicyDocument.Status.PROCESSED
+                document.save(
+                    update_fields=[
+                        "extracted_pages",
+                        "page_count",
+                        "status",
+                        "updated_at",
+                    ]
+                )
+
+            return Response(
+                {
+                    "id": document.pk,
+                    "title": document.title,
+                    "status": document.status,
+                    "page_count": document.page_count,
+                    "chunk_count": len(chunk_objects),
+                    "message": "PDF processed and chunks saved successfully.",
+                },
+                status=status.HTTP_200_OK,
+            )
+
+        except PDFProcessingError as exc:
+            document.status = PolicyDocument.Status.FAILED
+            document.save(update_fields=["status", "updated_at"])
+
+            return Response(
+                {"detail": str(exc)},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        except Exception:
+            logger.exception(
+                "Unexpected error processing policy document %s",
+                document.pk,
+            )
+            document.status = PolicyDocument.Status.FAILED
+            document.save(update_fields=["status", "updated_at"])
+
+            return Response(
+                {"detail": "An unexpected error occurred while processing the PDF."},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
+
+# Alias for backward compatibility
+PolicyDocumentProcessApiView = PolicyDocumentProcessAPIView
