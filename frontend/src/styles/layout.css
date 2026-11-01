@@ -1,0 +1,190 @@
+/* App Layout & Structure */
+
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  position: relative;
+}
+
+/* In welcome state, lock height to exactly viewport so NO scrolling is needed */
+.app-root.state-welcome {
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+/* In chat state, allow normal vertical scrolling */
+.app-root.state-chat {
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+/* Header */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(250, 249, 246, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border-subtle);
+  flex-shrink: 0;
+}
+
+.header-container {
+  max-width: var(--max-width-content);
+  margin: 0 auto;
+  padding: 0.9rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--color-primary);
+}
+
+.brand-logo-mark {
+  width: 32px;
+  height: 32px;
+  background-color: var(--color-primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent);
+  box-shadow: var(--shadow-subtle);
+}
+
+.brand-text-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-family: var(--font-heading);
+  font-size: 0.98rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--color-primary);
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.brand-subtitle {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  margin-top: 1px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+/* Main Content Area */
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+}
+
+.state-welcome .app-main {
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 3rem;
+}
+
+.content-container {
+  width: 100%;
+  max-width: var(--max-width-chat);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Conversation Thread */
+.chat-thread-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.75rem 0 8.5rem 0;
+  gap: 1.75rem;
+}
+
+/* Bottom Chat Composer Floating Area */
+.composer-dock {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  background: linear-gradient(
+    to bottom,
+    rgba(250, 249, 246, 0) 0%,
+    rgba(250, 249, 246, 0.94) 25%,
+    rgba(250, 249, 246, 1) 100%
+  );
+  padding: 1.25rem 1.5rem 1.1rem 1.5rem;
+  pointer-events: none;
+}
+
+.composer-inner {
+  max-width: var(--max-width-chat);
+  margin: 0 auto;
+  pointer-events: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .header-container {
+    padding: 0.8rem 1.25rem;
+  }
+
+  .content-container {
+    padding: 0 1.25rem;
+  }
+
+  .chat-thread-container {
+    padding: 1.25rem 0 8rem 0;
+    gap: 1.35rem;
+  }
+
+  .composer-dock {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-title {
+    font-size: 0.9rem;
+  }
+
+  .brand-subtitle {
+    font-size: 0.58rem;
+  }
+
+  .header-container {
+    padding: 0.75rem 1rem;
+  }
+
+  .content-container {
+    padding: 0 1rem;
+  }
+}

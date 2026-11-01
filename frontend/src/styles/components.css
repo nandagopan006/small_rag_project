@@ -1,0 +1,565 @@
+/* Component Styles */
+
+/* 1. BUTTONS & PILLS */
+.btn-pill-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--color-primary);
+  color: var(--color-background);
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  font-weight: 600;
+  padding: 0.65rem 1.4rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-button);
+  text-decoration: none;
+}
+
+.btn-pill-primary:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-1px);
+}
+
+.btn-pill-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-pill-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-full);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-pill-ghost:hover {
+  background-color: var(--color-surface-soft);
+  color: var(--color-primary);
+  border-color: var(--color-border);
+}
+
+/* Handbook Status Badge in Header */
+.status-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-text);
+  box-shadow: var(--shadow-subtle);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-success);
+  display: inline-block;
+  box-shadow: 0 0 0 2px var(--color-success-bg);
+}
+
+/* 2. SINGLE-SCREEN WELCOME (NO SCROLLING) */
+.welcome-single-screen {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: fadeIn 250ms ease-out;
+}
+
+.welcome-center-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.welcome-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 0.75rem;
+}
+
+.welcome-heading {
+  font-family: var(--font-heading);
+  font-size: 2.85rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--color-primary);
+  margin: 0 0 0.75rem 0;
+  max-width: 680px;
+}
+
+.accent-highlight {
+  color: var(--color-accent);
+  position: relative;
+  display: inline-block;
+}
+
+.welcome-description {
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--color-text-secondary);
+  max-width: 520px;
+  margin: 0 0 1.75rem 0;
+}
+
+/* Center-Hero Composer */
+.welcome-composer-area {
+  width: 100%;
+  max-width: 680px;
+  margin-bottom: 1.25rem;
+}
+
+/* Quick Question Pills */
+.suggested-pills-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  width: 100%;
+}
+
+.suggested-pills-label {
+  font-size: 0.66rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+}
+
+.suggested-pills-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  max-width: 720px;
+}
+
+.suggested-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  padding: 0.45rem 0.95rem;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-subtle);
+  white-space: nowrap;
+}
+
+.suggested-pill-btn:hover:not(:disabled) {
+  border-color: var(--color-accent);
+  background-color: var(--color-surface-soft);
+  color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.suggested-pill-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pill-arrow-icon {
+  color: var(--color-text-muted);
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.suggested-pill-btn:hover .pill-arrow-icon {
+  color: var(--color-accent);
+  transform: translate(1px, -1px);
+}
+
+/* Handbook Metadata Footer Strip */
+.welcome-status-footer {
+  margin-top: 1.75rem;
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  letter-spacing: 0.02em;
+}
+
+.footer-dot {
+  color: var(--color-border);
+  font-weight: bold;
+}
+
+/* 3. CHAT MESSAGES */
+.message-bubble-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  animation: slideUp 200ms ease-out;
+}
+
+/* User Message */
+.message-bubble-wrapper.user {
+  align-items: flex-end;
+}
+
+.user-message-bubble {
+  background-color: var(--color-primary);
+  color: var(--color-background);
+  padding: 0.9rem 1.35rem;
+  border-radius: var(--radius-lg) var(--radius-lg) 4px var(--radius-lg);
+  max-width: 80%;
+  font-size: 0.96rem;
+  line-height: 1.55;
+  word-break: break-word;
+  white-space: pre-wrap;
+  box-shadow: var(--shadow-subtle);
+}
+
+/* Assistant Message */
+.message-bubble-wrapper.assistant {
+  align-items: flex-start;
+}
+
+.assistant-message-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.4rem 1.6rem;
+  width: 100%;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.assistant-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-border-subtle);
+  padding-bottom: 0.65rem;
+}
+
+.assistant-author-group {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.assistant-avatar-badge {
+  width: 22px;
+  height: 22px;
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent);
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.assistant-author-name {
+  font-family: var(--font-heading);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.assistant-body-text {
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: var(--color-text);
+  word-break: break-word;
+}
+
+.assistant-body-text p {
+  margin: 0 0 0.9rem 0;
+}
+
+.assistant-body-text p:last-child {
+  margin-bottom: 0;
+}
+
+.formatted-bold {
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.formatted-italic {
+  font-style: italic;
+  color: var(--color-text);
+}
+
+.formatted-list {
+  margin: 0.5rem 0 0.9rem 1.35rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.formatted-list li {
+  line-height: 1.6;
+}
+
+.formatted-quote {
+  border-left: 3px solid var(--color-accent);
+  background-color: var(--color-surface-soft);
+  padding: 0.65rem 1rem;
+  margin: 0.75rem 0;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-style: italic;
+  color: var(--color-text);
+}
+
+.inline-source-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+  background-color: var(--color-surface-soft);
+  border: 1px solid var(--color-border);
+  padding: 0.1rem 0.45rem;
+  border-radius: var(--radius-xs);
+  vertical-align: baseline;
+  margin: 0 0.25rem;
+  text-transform: uppercase;
+}
+
+/* 5. LOADING INDICATOR */
+.loading-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.1rem 1.4rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  box-shadow: var(--shadow-subtle);
+  animation: pulse 1.8s infinite ease-in-out;
+}
+
+.loading-compass-icon {
+  color: var(--color-accent);
+  animation: spin 3s linear infinite;
+}
+
+.loading-text {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+/* 6. CHAT COMPOSER INPUT */
+.chat-composer-box {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 0.55rem 0.65rem 0.55rem 1.35rem;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  box-shadow: var(--shadow-composer);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.chat-composer-box:focus-within {
+  border-color: var(--color-accent);
+  box-shadow: 0 16px 40px rgba(197, 160, 135, 0.16), 0 6px 20px rgba(23, 23, 23, 0.05);
+}
+
+.composer-textarea {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+  font-family: var(--font-body);
+  font-size: 0.96rem;
+  line-height: 1.5;
+  color: var(--color-text);
+  max-height: 130px;
+  min-height: 24px;
+  padding: 0.4rem 0;
+}
+
+.composer-textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+.send-button {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-primary);
+  color: var(--color-background);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+
+.send-button:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+  transform: scale(1.04);
+}
+
+.send-button:disabled {
+  background-color: var(--color-surface-soft);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.composer-caption {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-top: 0.55rem;
+  letter-spacing: 0.01em;
+}
+
+/* 7. ERROR BANNER */
+.error-banner {
+  background-color: var(--color-error-bg);
+  border: 1px solid var(--color-error-border);
+  color: var(--color-error);
+  padding: 0.75rem 1.15rem;
+  border-radius: var(--radius-md);
+  font-size: 0.86rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.9rem;
+  animation: fadeIn 200ms ease-out;
+}
+
+.error-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.error-dismiss-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-error);
+  cursor: pointer;
+  font-size: 1.05rem;
+  padding: 0.2rem;
+  display: flex;
+  align-items: center;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .welcome-heading {
+    font-size: 2.2rem;
+  }
+
+  .welcome-description {
+    font-size: 0.94rem;
+    margin-bottom: 1.35rem;
+  }
+
+  .suggested-pills-list {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .suggested-pill-btn {
+    justify-content: space-between;
+    white-space: normal;
+    text-align: left;
+  }
+
+  .user-message-bubble {
+    max-width: 88%;
+  }
+
+  .assistant-message-card {
+    padding: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-heading {
+    font-size: 1.85rem;
+  }
+
+  .welcome-eyebrow {
+    font-size: 0.65rem;
+  }
+
+  .chat-composer-box {
+    border-radius: var(--radius-lg);
+    padding: 0.45rem 0.5rem 0.45rem 1rem;
+  }
+
+  .send-button {
+    width: 36px;
+    height: 36px;
+  }
+}
