@@ -1,0 +1,50 @@
+:root {
+  /* Colors from design reference */
+  --color-background: #FAF9F6;
+  --color-surface: #FFFFFF;
+  --color-surface-soft: #F5F2EB;
+  --color-surface-muted: #EFEBE3;
+  --color-primary: #171717;
+  --color-primary-hover: #2B2927;
+  --color-accent: #C5A087;
+  --color-accent-hover: #B58F76;
+  --color-accent-soft: rgba(197, 160, 135, 0.14);
+  --color-text: #272522;
+  --color-text-secondary: #77736E;
+  --color-text-muted: #A19D97;
+  --color-border: #E8E4DE;
+  --color-border-subtle: #F0ECE6;
+
+  /* Status Colors */
+  --color-success: #2E7D32;
+  --color-success-bg: #E8F5E9;
+  --color-error: #B94A48;
+  --color-error-bg: #FDF4F4;
+  --color-error-border: #F5C6CB;
+
+  /* Typography */
+  --font-heading: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Border Radii */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+
+  /* Elevation & Shadows */
+  --shadow-subtle: 0 2px 10px rgba(23, 23, 23, 0.03);
+  --shadow-card: 0 8px 30px rgba(23, 23, 23, 0.05);
+  --shadow-composer: 0 16px 40px rgba(23, 23, 23, 0.08);
+  --shadow-button: 0 6px 20px rgba(23, 23, 23, 0.12);
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 240ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Max Widths */
+  --max-width-content: 1120px;
+  --max-width-chat: 840px;
+}
