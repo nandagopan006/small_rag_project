@@ -29,29 +29,65 @@ myenv/
 env/
 venv/
 ENV/
+.venv/
 env.bak/
 venv.bak/
+*/myenv/
+*/venv/
+*/env/
+*/.venv/
 
-# SQLite Database
+# SQLite Database & local runtime data
 *.sqlite3
+*.sqlite3-journal
+*.db
 db.sqlite3
+backend/db.sqlite3
 
-# Django media & static
+# ChromaDB vector store
+chroma_data/
+backend/chroma_data/
+**/chroma_data/
+
+# Django media & static files (ignore uploaded files except sample policy)
 media/
+backend/media/policies/*
+!backend/media/policies/college_policy.pdf
 staticfiles/
+backend/staticfiles/
 
-# Local environment variables
+# Logs
+*.log
+*.log.*
+logs/
+backend/logs/
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# Local environment variables & secrets
 .env
 .env.*
 !.env.example
+backend/.env
+backend/.env.*
+!backend/.env.example
 
 # IDEs and Editors
 .vscode/
 .idea/
 *.swp
 *.swo
+*~
+*.sublime-project
+*.sublime-workspace
 
 # Operating System files
 .DS_Store
 Thumbs.db
-
+desktop.ini

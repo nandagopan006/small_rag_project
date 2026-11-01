@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-&@lzt%6h#wh0&zzca1fd%q^%8zk))w6o)p@ybcbz-_s&8_i22j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "testserver"]
 
 
 # Application definition
@@ -133,3 +133,26 @@ MAILERS = {
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+# OpenRouter API Configuration
+from decouple import AutoConfig
+
+env_config = AutoConfig(search_path=str(BASE_DIR))
+
+OPENROUTER_API_KEY = env_config("OPENROUTER_API_KEY", default="")
+OPENROUTER_MODEL = env_config(
+    "OPENROUTER_MODEL",
+    default="nvidia/nemotron-3.5-lightning:free",
+)
+OPENROUTER_BASE_URL = env_config(
+    "OPENROUTER_BASE_URL",
+    default="https://openrouter.ai/api/v1",
+).rstrip("/")
+
+try:
+    _raw_timeout = env_config("OPENROUTER_TIMEOUT", default=30)
+    OPENROUTER_TIMEOUT = int(_raw_timeout)
+    if OPENROUTER_TIMEOUT <= 0:
+        raise ValueError("OPENROUTER_TIMEOUT must be a positive integer.")
+except Exception as exc:
+    raise ValueError(f"Invalid OPENROUTER_TIMEOUT configuration: {exc}") from exc

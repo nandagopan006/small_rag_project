@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import PolicyDocumentAPIView, PolicyDocumentProcessAPIView
+from .views import PolicyDocumentAPIView, PolicyDocumentProcessAPIView,AskQuestionAPIView
 
 urlpatterns = [
     path(
@@ -13,4 +13,5 @@ urlpatterns = [
         PolicyDocumentProcessAPIView.as_view(),
         name="document-process",
     ),
+    path("chat/ask/",AskQuestionAPIView.as_view(),name="ask-question"),
 ]

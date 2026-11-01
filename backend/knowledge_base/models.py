@@ -67,3 +67,19 @@ class DocumentChunk(models.Model):
 
     def __str__(self):
         return f"{self.document.title} - Chunk {self.chunk_index}"
+
+
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
+
+
+@receiver(post_delete, sender=PolicyDocument)
+def delete_vectors_on_document_delete(sender, instance, **kwargs):
+    """Ensure ChromaDB vectors are removed when a policy document is deleted."""
+    try:
+        from .services.vector_store import delete_document_vectors
+
+        delete_document_vectors(instance.id)
+    except Exception:
+        # Ignore vector deletion error during test teardown or missing collection
+        pass
