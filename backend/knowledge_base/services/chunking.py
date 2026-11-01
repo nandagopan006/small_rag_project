@@ -10,11 +10,11 @@ class ExtractedPage(TypedDict):
     
 class TextChunk(TypedDict):
     """Represents a chunk with its source information."""
-    
-    chuck_index:int 
-    page:int
-    section_title:str
-    text:str
+
+    chunk_index: int
+    page: int
+    section_title: str
+    text: str
     
 # Initial character-based configuration.
 DEFAULT_CHUNK_SIZE = 1000
